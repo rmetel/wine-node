@@ -5,11 +5,9 @@ router.post("/", async (req, res) => {
   try {
     const email = await req.body.email;
     const name = await req.body.name;
-    const replyTo = await req.body.replyTo;
-    const subject = await req.body.subject;
     const message = await req.body.message;
 
-    await sendMail(email, name, replyTo, subject, message);
+    await sendMail(email, name, message);
 
     return res.status(200).send("Email was sent.");
   } catch (error) {

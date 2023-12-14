@@ -13,11 +13,11 @@ app.use(
 
 dotenv.config();
 
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
   res.status(200).send("Welcome");
 });
 
-app.use("/email", email);
+app.use("/api/email", email);
 
 app.listen(process.env.PORT || 3001, () => {
   console.log(`Server is up and running`);

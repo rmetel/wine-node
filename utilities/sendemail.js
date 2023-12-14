@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
 
-module.exports = async (email, name, replyTo, subject, message) => {
+module.exports = async (email, name, message) => {
   try {
     // initialize and define the mode of transport
     const transporter = nodemailer.createTransport({
@@ -15,18 +15,20 @@ module.exports = async (email, name, replyTo, subject, message) => {
     });
 
     // Defining the mail and sending it using the transport
-    const sentEmail = await transporter.sendMail({
+    await transporter.sendMail({
       from: {
-        name: "Kontakt",
+        name: "Kontakt via Webpage",
         address: process.env.USER,
       },
-      replyTo: replyTo,
-      to: email,
-      subject: subject,
-      html: `Von: ${name} &lt;${replyTo}&gt;<br/>Nachricht: ${message}`,
+      replyTo: email,
+      to: "ralph.metel@gmail.com", // set customer email here
+      subject: "Anfrage",
+      html: `
+      <strong>Name:</strong>&nbsp;${name}<br/>
+      <strong>Email:</strong>&nbsp;${email}<br/>
+      <strong>Nachricht:</strong><br/>${message}
+      `,
     });
-    const response = "Email sent successfully";
-    console.log(response);
   } catch (error) {
     console.log(error.message);
     return response;
