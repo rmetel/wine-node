@@ -9,7 +9,7 @@ router.post("/", async (req, res) => {
 
     await sendMail(email, name, message);
 
-    return res.status(200).send("Email was sent.");
+    return res.status(200).send("Email erfolgreich versendet.");
   } catch (error) {
     res.status(500).send(error.message);
   }
