@@ -25,7 +25,7 @@ router.post("/", async (req, res) => {
       message
     );
 
-    return res.status(200).send("Ihre Bewerbung wurde versendet, vielen Dank!");
+    return res.status(200).send("Ihre Bewerbung wurde versandt, vielen Dank!");
   } catch (error) {
     res.status(500).send(error.message);
   }

@@ -34,9 +34,9 @@ module.exports = async (
       to: process.env.USER,
       subject: "Bewerbung",
       html: `
-      ${firstName}&nbsp;${lastName}<br/>
-      ${street}&nbsp;${streetNumber}<br/>
-      ${zip}&nbsp;${city}<br/>
+      <p>${firstName}&nbsp;${lastName}</p>
+      <p>${street}&nbsp;${streetNumber}</p>
+      <p>${zip}&nbsp;${city}</p>
       <p>Email:&nbsp;${email}</p>
       <p>Telefon:&nbsp;<a href="tel:${phone}">${phone}</a></p>
       <h2 style="color: #333">Bewerbung</h2>
