@@ -3,6 +3,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const app = express();
 const email = require("./routes/email");
+const application = require("./routes/application");
 
 app.use(express.json());
 app.use(
@@ -18,6 +19,8 @@ app.get("/api", (req, res) => {
 });
 
 app.use("/api/email", email);
+
+app.use("/api/application", application);
 
 app.listen(process.env.PORT || 3001, () => {
   console.log(`Server is up and running`);

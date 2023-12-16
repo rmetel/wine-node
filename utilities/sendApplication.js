@@ -1,6 +1,16 @@
 const nodemailer = require("nodemailer");
 
-module.exports = async (firstName, lastName, email, phone, message) => {
+module.exports = async (
+  firstName,
+  lastName,
+  street,
+  streetNumber,
+  zip,
+  city,
+  email,
+  phone,
+  message
+) => {
   try {
     // initialize and define the mode of transport
     const transporter = nodemailer.createTransport({
@@ -22,13 +32,15 @@ module.exports = async (firstName, lastName, email, phone, message) => {
       },
       replyTo: email,
       to: process.env.USER,
-      subject: "Kontakt",
+      subject: "Bewerbung",
       html: `
       ${firstName}&nbsp;${lastName}<br/>
+      ${street}&nbsp;${streetNumber}<br/>
+      ${zip}&nbsp;${city}<br/>
       <p>Email:&nbsp;${email}</p>
       <p>Telefon:&nbsp;<a href="tel:${phone}">${phone}</a></p>
-      <h2 style="color: #333">Nachricht</h2>
-      <p style="color: #333">${message}</p>
+      <h2 style="color: #333">Bewerbung</h2>
+      ${message}
       `,
     });
   } catch (error) {
