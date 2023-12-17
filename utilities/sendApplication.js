@@ -1,4 +1,4 @@
-const nodemailer = require("nodemailer");
+const getTransporter = require("../utilities/transporter");
 
 module.exports = async (
   firstName,
@@ -12,17 +12,7 @@ module.exports = async (
   message
 ) => {
   try {
-    // initialize and define the mode of transport
-    const transporter = nodemailer.createTransport({
-      host: process.env.HOST,
-      service: process.env.SERVICE,
-      port: Number(process.env.EMAIL_PORT),
-      secure: Boolean(process.env.SECURE),
-      auth: {
-        user: process.env.USER,
-        pass: process.env.PASS,
-      },
-    });
+    const transporter = await getTransporter();
 
     // Defining the mail and sending it using the transport
     await transporter.sendMail({
@@ -30,6 +20,10 @@ module.exports = async (
         name: process.env.SENDER_NAME,
         address: process.env.USER,
       },
+      cc: [
+        // "info@metzner-gruppe.com",
+        "ralph.metel@gmail.com",
+      ],
       replyTo: email,
       to: process.env.USER,
       subject: "Bewerbung",
