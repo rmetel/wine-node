@@ -21,9 +21,12 @@ sequelize
   });
 
 router.post("/register", async (req, res) => {
-  const { username, password } = req.body;
-  const newUser = await User.create({ username, password });
-  res.json(newUser);
+  const { username, password, role = "user" } = req.body;
+  const user = await User.create({ username, password, role });
+  res.json({
+    message: "User successfully created",
+    user,
+  });
 });
 
 module.exports = router;

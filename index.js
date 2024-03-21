@@ -21,9 +21,9 @@ app.get("/api", (req, res) => {
 
 app.use("/api/auth", auth);
 
-app.use("/api/email", email);
+// app.use("/api/email", email);
 
-app.use("/api/application", application);
+// app.use("/api/application", application);
 
 app.listen(process.env.PORT || 3001, () => {
   console.log(`Server is up and running`);
