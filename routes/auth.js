@@ -8,10 +8,11 @@ const sequelize = new Sequelize("wine-db", "root", "wine-db", {
 const User = sequelize.define("user", {
   username: Sequelize.STRING,
   password: Sequelize.STRING,
+  role: Sequelize.STRING,
 });
 
 sequelize
-  .sync()
+  .sync({ alter: true })
   .then(() => {
     console.log("User table created successfully.");
   })
