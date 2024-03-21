@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const app = express();
+const auth = require("./routes/auth");
 const email = require("./routes/email");
 const application = require("./routes/application");
 
@@ -17,6 +18,8 @@ dotenv.config();
 app.get("/api", (req, res) => {
   res.status(200).send("Welcome");
 });
+
+app.use("/api/auth", auth);
 
 app.use("/api/email", email);
 

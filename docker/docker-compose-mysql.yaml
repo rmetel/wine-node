@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  wine-db:
+    container_name: wine-db
+    image: mysql:8.0.30
+    environment:
+      MYSQL_DATABASE: wine-db
+      MYSQL_ROOT_PASSWORD: wine-db
+    ports:
+      - "3306:3306"
+    volumes:
+      - "C:/Users/ddr_r/databases/wine-db:/var/lib/mysql:rw"
+# docker-compose -f docker/docker-compose-mysql.yaml up -d
