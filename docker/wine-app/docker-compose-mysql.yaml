@@ -11,4 +11,4 @@ services:
       - "3306:3306"
     volumes:
       - "C:/Users/ddr_r/databases/wine-db:/var/lib/mysql:rw"
-# docker-compose -f docker/docker-compose-mysql.yaml up -d
+# docker-compose -f docker/wine-app/docker-compose-mysql.yaml up -d

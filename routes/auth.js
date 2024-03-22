@@ -3,7 +3,7 @@ const Sequelize = require("sequelize");
 const jwt = require("jsonwebtoken");
 
 const sequelize = new Sequelize("wine-db", "root", "wine-db", {
-  host: "localhost",
+  host: "localhost", // wine-db
   dialect: "mysql",
 });
 
