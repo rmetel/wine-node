@@ -1,5 +1,7 @@
 const router = require("express").Router();
 const Sequelize = require("sequelize");
+const jwt = require("jsonwebtoken");
+
 const sequelize = new Sequelize("wine-db", "root", "wine-db", {
   host: "localhost",
   dialect: "mysql",
@@ -27,6 +29,18 @@ router.post("/register", async (req, res) => {
     message: "User successfully created",
     user,
   });
+});
+
+router.post("/login", async (req, res) => {
+  const { username, password } = req.body;
+  const user = await User.findOne({ where: { username, password } });
+
+  if (user) {
+    const token = jwt.sign({ username }, process.env.JWT_SECRET);
+    res.json({ token });
+  } else {
+    res.status(401).json({ message: "Invalid credentials" });
+  }
 });
 
 module.exports = router;

@@ -1,24 +1,27 @@
 # Apple iCloud
-HOST = smtp.mail.me.com
-SERVICE = iCloud
-EMAIL_PORT = 587
-USER = 
-PASS = 
-SENDER_NAME = 
-
-# Gmail
-# HOST = smtp.gmail.com
-# SERVICE = gmail
-# EMAIL_PORT = 587
-# SECURE = true
-# USER = 
-# PASS = 
-# SENDER_NAME = 
-
-# Links
-# https://support.google.com/a/answer/176600?hl=de
-# https://support.google.com/accounts/answer/185833?visit_id=638381741676594412-1454162281&p=InvalidSecondFactor&rd=1
-
 # https://clean.email/blog/email-settings/icloud-email-settings
 # https://support.apple.com/en-us/102525
 # https://support.apple.com/de-de/102654
+# HOST = smtp.mail.me.com
+# SERVICE = iCloud
+# EMAIL_PORT = 587
+# USER = ***
+# PASS = ***
+# SENDER_NAME = ***
+
+# Gmail
+# https://support.google.com/a/answer/176600?hl=de
+# https://support.google.com/accounts/answer/185833?visit_id=638381741676594412-1454162281&p=InvalidSecondFactor&rd=1
+HOST = smtp.gmail.com
+SERVICE = gmail
+EMAIL_PORT = 587
+SECURE = true
+USER = ralph.metel@gmail.com
+PASS = ***
+SENDER_NAME = ***
+
+# JWT
+# to create jwt token, execute in console:
+# node
+# require("crypto").randomBytes(35).toString("hex")
+JWT_SECRET = ***
