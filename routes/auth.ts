@@ -1,8 +1,7 @@
+import bcrypt from "bcryptjs";
 import { Router } from "express";
+import jwt from "jsonwebtoken";
 import { DataTypes, Sequelize } from "sequelize";
-
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
 
 const sequelize = new Sequelize("wine-db", "root", "wine-db", {
   host: "localhost", // wine-db
@@ -57,7 +56,7 @@ router.post("/login", async (req, res) => {
   if (user) {
     bcrypt.compare(password, user.password).then(function (isValid: boolean) {
       if (isValid) {
-        const token = jwt.sign({ username }, process.env.JWT_SECRET);
+        const token = jwt.sign({ username }, process.env.JWT_SECRET!);
         res.json({ message: "Login successful", token });
       } else {
         res.status(401).json({ message: "Invalid password" });
