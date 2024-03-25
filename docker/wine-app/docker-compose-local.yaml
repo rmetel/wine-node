@@ -3,7 +3,7 @@ version: "3"
 services:
   wine-db:
     container_name: wine-db
-    image: mysql:latest
+    image: mysql:8.0.30
     environment:
       MYSQL_ROOT_PASSWORD: wine-db
       MYSQL_DATABASE: wine-db
