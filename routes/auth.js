@@ -26,13 +26,19 @@ sequelize
 router.post("/register", async (req, res) => {
   const { username, password, role = "user" } = req.body;
 
-  bcrypt.hash(password, 10).then(async (password) => {
-    const user = await User.create({ username, password, role });
-    res.json({
-      message: "User successfully created",
-      user,
+  const user = await User.findOne({ where: { username } });
+
+  if (user) {
+    res.status(401).json({ message: "Benutzername bereits vergeben" });
+  } else {
+    bcrypt.hash(password, 10).then(async (password) => {
+      const user = await User.create({ username, password, role });
+      res.json({
+        message: "User successfully created",
+        user,
+      });
     });
-  });
+  }
 });
 
 router.post("/login", async (req, res) => {
