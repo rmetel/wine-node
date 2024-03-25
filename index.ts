@@ -1,10 +1,9 @@
-const express = require("express");
-const cors = require("cors");
-const dotenv = require("dotenv");
+import cors from "cors";
+import dotenv from "dotenv";
+import express, { Request, Response } from "express";
+import auth from "./routes/auth";
+
 const app = express();
-const auth = require("./routes/auth");
-const email = require("./routes/email");
-const application = require("./routes/application");
 
 app.use(express.json());
 app.use(
@@ -15,7 +14,7 @@ app.use(
 
 dotenv.config();
 
-app.get("/api", (req, res) => {
+app.get("/api", (req: Request, res: Response) => {
   res.status(200).send("Welcome");
 });
 
