@@ -1,5 +1,6 @@
-const router = require("express").Router();
-const Sequelize = require("sequelize");
+import { Router } from "express";
+import { DataTypes, Sequelize } from "sequelize";
+
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
@@ -8,10 +9,10 @@ const sequelize = new Sequelize("wine-db", "root", "wine-db", {
   dialect: "mysql",
 });
 
-const User = sequelize.define("user", {
-  username: Sequelize.STRING,
-  password: Sequelize.STRING,
-  role: Sequelize.STRING,
+const Users = sequelize.define("user", {
+  username: DataTypes.STRING,
+  password: DataTypes.STRING,
+  role: DataTypes.STRING,
 });
 
 sequelize
@@ -19,20 +20,26 @@ sequelize
   .then(() => {
     console.log("User table created successfully.");
   })
-  .catch((error) => {
+  .catch((error: Error) => {
     console.error("Error creating User table:", error);
   });
+
+const router = Router();
 
 router.post("/register", async (req, res) => {
   const { username, password, role = "user" } = req.body;
 
-  const user = await User.findOne({ where: { username } });
+  const user = await Users.findOne({ where: { username } });
 
   if (user) {
     res.status(401).json({ message: "Benutzername bereits vergeben" });
   } else {
-    bcrypt.hash(password, 10).then(async (password) => {
-      const user = await User.create({ username, password, role });
+    bcrypt.hash(password, 10).then(async (hashedPassword: string) => {
+      const user = await Users.create({
+        username,
+        password: hashedPassword,
+        role,
+      });
       res.json({
         message: "User successfully created",
         user,
@@ -43,10 +50,12 @@ router.post("/register", async (req, res) => {
 
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
-  const user = await User.findOne({ where: { username } });
+  const user = (await Users.findOne({
+    where: { username },
+  })) as any;
 
   if (user) {
-    bcrypt.compare(password, user.password).then(function (isValid) {
+    bcrypt.compare(password, user.password).then(function (isValid: boolean) {
       if (isValid) {
         const token = jwt.sign({ username }, process.env.JWT_SECRET);
         res.json({ message: "Login successful", token });
@@ -59,4 +68,4 @@ router.post("/login", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
